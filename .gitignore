@@ -1,0 +1,6 @@
+build/
+dist/
+external/
+*.user
+.vs/
+runtime/
