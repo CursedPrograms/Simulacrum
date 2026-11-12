@@ -27,6 +27,7 @@ static std::string exeDir() {
 }
 
 std::string runtimeDir() {
+    if (const wchar_t* e = _wgetenv(L"TERMINUS_RUNTIME")) if (*e) return fs::path(e).u8string();   // another AliceVision folder
     // installed: <Terminus>\alicevision; while developing, the unpacked runtime next to the build
     for (const fs::path& p : {fs::u8path(exeDir()) / "alicevision", fs::u8path(exeDir()) / ".." / ".." / "runtime" / "alicevision"}) {
         std::error_code ec;
@@ -154,10 +155,27 @@ bool hasCuda(std::string& name) {
 
 std::string projectsDir() {
     if (const wchar_t* e = _wgetenv(L"TERMINUS_PROJECTS")) if (*e) return fs::path(e).u8string();
-    PWSTR p = nullptr;
-    std::string r;
-    if (SUCCEEDED(SHGetKnownFolderPath(FOLDERID_Documents, 0, nullptr, &p))) { r = (fs::path(p) / "Terminus").u8string(); CoTaskMemFree(p); }
-    return r;
+    // Documents\Terminus, unless Windows guards Documents (Controlled folder access): then Terminus in the user's own
+    // folder. Tried once, by really writing a file.
+    static std::string dir;
+    if (!dir.empty()) return dir;
+    auto canWrite = [](const fs::path& d) {
+        std::error_code ec;
+        fs::create_directories(d, ec);
+        const fs::path t = d / ".terminus-write-test";
+        FILE* f = _wfopen(t.wstring().c_str(), L"wb");
+        if (!f) return false;
+        fclose(f); fs::remove(t, ec);
+        return true;
+    };
+    for (const KNOWNFOLDERID& id : {FOLDERID_Documents, FOLDERID_Profile}) {
+        PWSTR p = nullptr;
+        if (SUCCEEDED(SHGetKnownFolderPath(id, 0, nullptr, &p))) {
+            const fs::path d = fs::path(p) / "Terminus"; CoTaskMemFree(p);
+            if (canWrite(d)) return dir = d.u8string();
+        }
+    }
+    return dir;
 }
 #else
 std::string runtimeDir() { return {}; }

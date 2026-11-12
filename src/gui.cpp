@@ -481,7 +481,8 @@ static void leftPanel(float w) {
         if (ImGui::Button("Stop", ImVec2(w, 30))) progress.stop = true;
         tip("It can carry on from here later");
     } else if (done) {
-        ImGui::TextDisabled("Made in %d:%02d. %zu triangles.", (int)buildSeconds / 60, (int)buildSeconds % 60, mesh.triangles());
+        if (buildSeconds > 0) ImGui::TextDisabled("Made in %d:%02d. %zu triangles.", (int)buildSeconds / 60, (int)buildSeconds % 60, mesh.triangles());
+        else ImGui::TextDisabled("%zu triangles.", mesh.triangles());
     }
     // the steps, ticked as they finish
     if (running || !buildError.empty()) {

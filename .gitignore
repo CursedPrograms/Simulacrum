@@ -4,3 +4,4 @@ external/
 *.user
 .vs/
 runtime/
+dist/
