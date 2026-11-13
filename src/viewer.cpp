@@ -119,7 +119,7 @@ void main() {
   vec3 n = normalize(N); if (!gl_FrontFacing) n = -n;
   float d = max(dot(n, normalize(vec3(0.4, 0.8, 0.5))), 0.0) * 0.75 + max(dot(n, normalize(eye)), 0.0) * 0.35;
   if (mode == 0) { vec3 c = texture(tex, T).rgb; o = vec4(c * mix(1.0, 0.35 + d, light), 1); }
-  else if (mode == 3) o = vec4(0.88, 0.25, 0.54, 1);
+  else if (mode == 3) o = vec4(0.0, 0.482, 0.718, 1);
   else { vec3 clay = vec3(0.78, 0.76, 0.74); o = vec4(clay * (0.25 + d), 1); }
 })");
     progPts = program(R"(#version 330
