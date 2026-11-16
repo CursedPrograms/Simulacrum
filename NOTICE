@@ -1,12 +1,12 @@
-Terminus
+Simulacrum
 Copyright (c) 2026 Cursed Entertainment. MIT License (see LICENSE).
 
-Terminus runs and ships the following, under their own licences:
+Simulacrum runs and ships the following, under their own licences:
 
 AliceVision 3.3 (alicevision\: the photogrammetry programs, their libraries and data), as Meshroom 2025.1 ships it
   AliceVision contributors - https://github.com/alicevision/AliceVision - Mozilla Public License 2.0
   The licences of AliceVision and the libraries it is built with are in alicevision\share\aliceVision
-  (COPYING.md, LICENSE-MPL2.md, LICENSE-MIT-libmv.md). Its source code is at the address above; Terminus runs the
+  (COPYING.md, LICENSE-MPL2.md, LICENSE-MIT-libmv.md). Its source code is at the address above; Simulacrum runs the
   programs unchanged. The pipeline's steps and settings follow Meshroom's (https://github.com/alicevision/Meshroom,
   MPL-2.0).
   The vocabulary tree (vlfeat_K80L3.SIFT.tree) and the camera sensor database (cameraSensors.db) come with it.

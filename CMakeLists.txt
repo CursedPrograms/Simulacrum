@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
-project(Terminus VERSION 1.0.0 LANGUAGES C CXX)
-# Terminus: photos to a textured 3D model, on your own PC. Part of Atelier.
-# The photogrammetry is AliceVision's (MPL-2.0), shipped beside Terminus.exe in alicevision\ (see make_runtime.py).
+project(Simulacrum VERSION 1.0.0 LANGUAGES C CXX)
+# Simulacrum: photos to a textured 3D model, on your own PC. Part of Atelier.
+# The photogrammetry is AliceVision's (MPL-2.0), shipped beside Simulacrum.exe in alicevision\ (see make_runtime.py).
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
@@ -37,19 +37,19 @@ set(SOURCES src/gui.cpp src/splash.cpp src/proc.cpp src/pipeline.cpp src/model.c
 if(WIN32)
     list(APPEND SOURCES src/app.rc)
 endif()
-add_executable(Terminus WIN32 ${SOURCES})
-target_include_directories(Terminus PRIVATE src ${STB_DIR})
-target_link_libraries(Terminus PRIVATE imgui)
-target_compile_definitions(Terminus PRIVATE TERMINUS_VERSION="${PROJECT_VERSION}")
+add_executable(Simulacrum WIN32 ${SOURCES})
+target_include_directories(Simulacrum PRIVATE src ${STB_DIR})
+target_link_libraries(Simulacrum PRIVATE imgui)
+target_compile_definitions(Simulacrum PRIVATE SIMULACRUM_VERSION="${PROJECT_VERSION}")
 if(TARGET SDL2::SDL2main)
-    target_link_libraries(Terminus PRIVATE SDL2::SDL2main)
+    target_link_libraries(Simulacrum PRIVATE SDL2::SDL2main)
 endif()
 if(MSVC)
-    target_compile_options(Terminus PRIVATE /W3 /utf-8 /O2 /D_CRT_SECURE_NO_WARNINGS)
+    target_compile_options(Simulacrum PRIVATE /W3 /utf-8 /O2 /D_CRT_SECURE_NO_WARNINGS)
 endif()
-add_custom_command(TARGET Terminus POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/assets $<TARGET_FILE_DIR:Terminus>/assets)
+add_custom_command(TARGET Simulacrum POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/assets $<TARGET_FILE_DIR:Simulacrum>/assets)
 if(WIN32)
-    add_custom_command(TARGET Terminus POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:SDL2::SDL2> $<TARGET_FILE_DIR:Terminus>)
+    add_custom_command(TARGET Simulacrum POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:SDL2::SDL2> $<TARGET_FILE_DIR:Simulacrum>)
 endif()

@@ -1,4 +1,4 @@
-// Terminus - running AliceVision's programs (see proc.h)
+// Simulacrum - running AliceVision's programs (see proc.h)
 #include "proc.h"
 
 #include <algorithm>
@@ -27,8 +27,8 @@ static std::string exeDir() {
 }
 
 std::string runtimeDir() {
-    if (const wchar_t* e = _wgetenv(L"TERMINUS_RUNTIME")) if (*e) return fs::path(e).u8string();   // another AliceVision folder
-    // installed: <Terminus>\alicevision; while developing, the unpacked runtime next to the build
+    if (const wchar_t* e = _wgetenv(L"SIMULACRUM_RUNTIME")) if (*e) return fs::path(e).u8string();   // another AliceVision folder
+    // installed: <Simulacrum>\alicevision; while developing, the unpacked runtime next to the build
     for (const fs::path& p : {fs::u8path(exeDir()) / "alicevision", fs::u8path(exeDir()) / ".." / ".." / "runtime" / "alicevision"}) {
         std::error_code ec;
         if (fs::exists(p / "bin" / "aliceVision_cameraInit.exe", ec)) return fs::weakly_canonical(p, ec).u8string();
@@ -67,7 +67,7 @@ static std::wstring quote(const std::wstring& a) {
 int run(const std::string& exe, const std::vector<std::string>& args, const std::string& workDir,
         const std::function<void(const std::string&)>& onLine, std::atomic<bool>& stop) {
     const std::string rt = runtimeDir();
-    if (rt.empty()) { onLine("The AliceVision runtime is missing: please reinstall Terminus."); return -1; }
+    if (rt.empty()) { onLine("The AliceVision runtime is missing: please reinstall Simulacrum."); return -1; }
     const std::wstring path = (fs::u8path(rt) / "bin" / (exe + ".exe")).wstring();
     std::wstring cmd = quote(path);
     for (const auto& a : args) cmd += L" " + quote(wide(a));
@@ -82,7 +82,7 @@ int run(const std::string& exe, const std::vector<std::string>& args, const std:
     PROCESS_INFORMATION pi{};
     std::vector<wchar_t> cl(cmd.begin(), cmd.end()); cl.push_back(0);
     const std::wstring wd = wide(workDir);
-    // its own job object: if Terminus goes, the program goes with it
+    // its own job object: if Simulacrum goes, the program goes with it
     HANDLE job = CreateJobObjectW(nullptr, nullptr);
     JOBOBJECT_EXTENDED_LIMIT_INFORMATION li{};
     li.BasicLimitInformation.LimitFlags = JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE;
@@ -154,15 +154,15 @@ bool hasCuda(std::string& name) {
 }
 
 std::string projectsDir() {
-    if (const wchar_t* e = _wgetenv(L"TERMINUS_PROJECTS")) if (*e) return fs::path(e).u8string();
-    // Documents\Terminus, unless Windows guards Documents (Controlled folder access): then Terminus in the user's own
+    if (const wchar_t* e = _wgetenv(L"SIMULACRUM_PROJECTS")) if (*e) return fs::path(e).u8string();
+    // Documents\Simulacrum, unless Windows guards Documents (Controlled folder access): then Simulacrum in the user's own
     // folder. Tried once, by really writing a file.
     static std::string dir;
     if (!dir.empty()) return dir;
     auto canWrite = [](const fs::path& d) {
         std::error_code ec;
         fs::create_directories(d, ec);
-        const fs::path t = d / ".terminus-write-test";
+        const fs::path t = d / ".simulacrum-write-test";
         FILE* f = _wfopen(t.wstring().c_str(), L"wb");
         if (!f) return false;
         fclose(f); fs::remove(t, ec);
@@ -171,7 +171,7 @@ std::string projectsDir() {
     for (const KNOWNFOLDERID& id : {FOLDERID_Documents, FOLDERID_Profile}) {
         PWSTR p = nullptr;
         if (SUCCEEDED(SHGetKnownFolderPath(id, 0, nullptr, &p))) {
-            const fs::path d = fs::path(p) / "Terminus"; CoTaskMemFree(p);
+            const fs::path d = fs::path(p) / "Simulacrum"; CoTaskMemFree(p);
             if (canWrite(d)) return dir = d.u8string();
         }
     }
@@ -181,7 +181,7 @@ std::string projectsDir() {
 std::string runtimeDir() { return {}; }
 void setupEnvironment() {}
 int run(const std::string&, const std::vector<std::string>&, const std::string&, const std::function<void(const std::string&)>& onLine, std::atomic<bool>&) {
-    onLine("Terminus runs on Windows for now"); return -1;
+    onLine("Simulacrum runs on Windows for now"); return -1;
 }
 bool hasCuda(std::string&) { return false; }
 std::string projectsDir() { return {}; }

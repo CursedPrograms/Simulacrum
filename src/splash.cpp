@@ -1,4 +1,4 @@
-// Terminus - the splash: a boundary stone (Terminus's own mark) as a cloud of measured points, the cameras that
+// Simulacrum - the splash: a carved pillar (Simulacrum's own mark) as a cloud of measured points, the cameras that
 // photographed it ringed round it in pink, the name, the version, the credits and what's loading. Atelier greys and
 // the Cursed pink, solid; drawn with ImGui's draw list so it's sharp at any size.
 #include "splash.h"
@@ -8,8 +8,8 @@
 #include <cfloat>
 #include <cmath>
 
-#ifndef TERMINUS_VERSION
-#define TERMINUS_VERSION "1.0.0"
+#ifndef SIMULACRUM_VERSION
+#define SIMULACRUM_VERSION "1.0.0"
 #endif
 
 namespace Splash {
@@ -31,7 +31,7 @@ void draw(ImDrawList* dl, float x, float y, const char* status, float progress) 
     dl->PushClipRect(o, end, true);
     dl->AddRectFilled(o, end, BG);
 
-    // the stone: a rounded-top pillar (a terminus, a Roman boundary marker), as points on its surface, turned a little
+    // the pillar: a rounded-top pillar (the thing being copied), as points on its surface, turned a little
     const float cx = x + 470, cy = y + 205, yaw = 0.5f;
     for (int i = 0; i < 1500; ++i) {
         const float u = hash(i, 1), v = hash(i, 2);
@@ -51,7 +51,7 @@ void draw(ImDrawList* dl, float x, float y, const char* status, float progress) 
     for (int k = 0; k < 9; ++k) {
         const float a = k / 9.0f * 6.2832f + 0.3f;
         const float rx = std::cos(a) * 130, rz = std::sin(a) * 130 * 0.35f;
-        if (rz < -10) continue;   // the far side is hidden behind the stone
+        if (rz < -10) continue;   // the far side is hidden behind the pillar
         const ImVec2 c(cx + rx, cy + 20 + rz);
         const float dx = -std::cos(a), len = 16;
         const ImVec2 tip(c.x + dx * len, c.y - 2);
@@ -63,7 +63,7 @@ void draw(ImDrawList* dl, float x, float y, const char* status, float progress) 
     const float ts = 50, tx = x + 40, ty = y + 92;
     text(dl, titleFont, ts, ImVec2(tx, ty), TEXT, "Termi");
     text(dl, titleFont, ts, ImVec2(tx + textWidth(titleFont, ts, "Termi"), ty), PINK, "nus");
-    text(dl, nullptr, 16, ImVec2(tx + 2, ty + 62), DIM, "Version " TERMINUS_VERSION);
+    text(dl, nullptr, 16, ImVec2(tx + 2, ty + 62), DIM, "Version " SIMULACRUM_VERSION);
     text(dl, nullptr, 16, ImVec2(tx + 2, ty + 84), DIM, "Photos to 3D by Cursed Entertainment");
 
     const float cs = 13, cry = y + 306;

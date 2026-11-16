@@ -1,4 +1,4 @@
-// Terminus - running AliceVision's programs: no console windows, their output line by line, stoppable.
+// Simulacrum - running AliceVision's programs: no console windows, their output line by line, stoppable.
 #pragma once
 #include <atomic>
 #include <functional>
@@ -7,7 +7,7 @@
 
 namespace Proc {
 
-// the AliceVision runtime Terminus ships with (bin\ and share\), next to Terminus.exe; empty if it's missing
+// the AliceVision runtime Simulacrum ships with (bin\ and share\), next to Simulacrum.exe; empty if it's missing
 std::string runtimeDir();
 // set ALICEVISION_ROOT and friends, and put the runtime's bin first on PATH (once, at start)
 void setupEnvironment();
@@ -20,7 +20,7 @@ int run(const std::string& exe, const std::vector<std::string>& args, const std:
 // an NVIDIA card with CUDA (the depth maps need one); name gets its name and memory, for the window
 bool hasCuda(std::string& name);
 
-// where Terminus keeps its projects: Documents\Terminus
+// where Simulacrum keeps its projects: Documents\Simulacrum
 std::string projectsDir();
 
 }

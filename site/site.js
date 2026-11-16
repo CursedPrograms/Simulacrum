@@ -1,4 +1,4 @@
-// Terminus's page: the feature cards and the year
+// Simulacrum's page: the feature cards and the year
 (function () {
   'use strict';
   const features = [
@@ -7,7 +7,7 @@
     ['Every setting a slider', 'Feature detail, matching, depth photo size, surface detail, smoothing, triangles kept, texture size and sharpness, hole filling.'],
     ['Turn it round', 'Textured, clay or wireframe; the cameras, a floor and the light; drag to turn, wheel to zoom; save a picture of it.'],
     ['Save it anywhere', 'GLB with the texture inside for any 3D app or the web, OBJ with its textures, or STL for 3D printing, at the real size you set.'],
-    ['Any PC', 'An NVIDIA card measures depth for full detail; without one, Terminus builds the model from the matched points. Everything it needs is inside.']
+    ['Any PC', 'An NVIDIA card measures depth for full detail; without one, Simulacrum builds the model from the matched points. Everything it needs is inside.']
   ];
   const grid = document.getElementById('features');
   if (grid) {

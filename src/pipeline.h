@@ -1,4 +1,4 @@
-// Terminus - photos to a textured 3D model: AliceVision's photogrammetry, one step after another, each step's
+// Simulacrum - photos to a textured 3D model: AliceVision's photogrammetry, one step after another, each step's
 // output kept so a stopped build carries on where it was.
 #pragma once
 #include <atomic>
@@ -42,7 +42,7 @@ struct Progress {
     std::atomic<bool> running{false};
 };
 
-// project: a folder (Documents\Terminus\<name>); photos: image files. Runs from the first step whose output is
+// project: a folder (Documents\Simulacrum\<name>); photos: image files. Runs from the first step whose output is
 // missing (or from `from`, discarding that step and the later ones). Returns "" or what went wrong.
 std::string build(const std::string& project, const std::vector<std::string>& photos, const Settings& s, int from,
                   Progress& p, const std::function<void(const std::string&)>& log);

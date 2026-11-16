@@ -1,4 +1,4 @@
-// Terminus - the 3D view (see viewer.h). OpenGL 3.3 core, its functions fetched from the driver through SDL.
+// Simulacrum - the 3D view (see viewer.h). OpenGL 3.3 core, its functions fetched from the driver through SDL.
 #include "viewer.h"
 
 #include <SDL.h>

@@ -1,4 +1,4 @@
-"""Terminus - assembles runtime/alicevision: just the AliceVision programs Terminus runs, the DLLs they load (followed
+"""Simulacrum - assembles runtime/alicevision: just the AliceVision programs Simulacrum runs, the DLLs they load (followed
 through each DLL's own imports) and the data they read, out of a Meshroom 2025.1 folder (its aliceVision\\).
 
     python tools/make_runtime.py MESHROOM_ALICEVISION_FOLDER [OUT]

@@ -1,4 +1,4 @@
-// Terminus - the 3D view: the model (textured, plain clay or wireframe), the matched points and the cameras that
+// Simulacrum - the 3D view: the model (textured, plain clay or wireframe), the matched points and the cameras that
 // took the photos, turned with the mouse. Drawn into its own texture, shown inside the window.
 #pragma once
 #include "model.h"

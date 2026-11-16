@@ -22,19 +22,19 @@
 <br>
 
 <div align="center">
-  <img src="assets/logo.png" alt="Terminus" width="120"/>
+  <img src="assets/logo.png" alt="Simulacrum" width="120"/>
 </div>
 
-# Terminus
+# Simulacrum
 
-**Photos to a textured 3D model, on your own PC.** Walk round a thing taking photos, drop them on Terminus, press one
+**Photos to a textured 3D model, on your own PC.** Walk round a thing taking photos, drop them on Simulacrum, press one
 button: it works out where every photo was taken from, measures the depth in each one and builds a solid, textured
 model you can turn, print or use in any 3D app. The photogrammetry is [AliceVision](https://github.com/alicevision/AliceVision)'s,
 the engine of [Meshroom](https://github.com/alicevision/Meshroom), in a window anyone can use. Part of
 **[Atelier](https://github.com/CursedPrograms/Atelier)**, Cursed Entertainment's creative suite.
-**[Website](https://cursedprograms.github.io/Terminus/)**
+**[Website](https://cursedprograms.github.io/Simulacrum/)**
 
-![Terminus: a statue made from 41 photos, textured, in the 3D view](images/window.jpg)
+![Simulacrum: a statue made from 41 photos, textured, in the 3D view](images/window.jpg)
 
 ## Features
 
@@ -52,7 +52,7 @@ the engine of [Meshroom](https://github.com/alicevision/Meshroom), in a window a
   its textures, or STL for 3D printing, at the real size you set.
 - **Carries on:** stop a build and carry on later from the step it got to; every model is a folder of its own, with
   a log of everything that happened.
-- **Any PC:** an NVIDIA graphics card measures depth for full detail; without one, Terminus builds the model from the
+- **Any PC:** an NVIDIA graphics card measures depth for full detail; without one, Simulacrum builds the model from the
   matched points by itself.
 
 ## Minimum requirements
@@ -67,12 +67,12 @@ the engine of [Meshroom](https://github.com/alicevision/Meshroom), in a window a
 
 ## Download and run
 
-Windows: **Terminus-setup.exe** from [Releases](https://github.com/CursedPrograms/Terminus/releases) installs it for
-you (no administrator needed) with Start menu and Desktop shortcuts. Or unzip **Terminus-win64.zip** anywhere and run
-`Terminus.exe`, or get it through the [Atelier launcher](https://github.com/CursedPrograms/Atelier). Everything it
+Windows: **Simulacrum-setup.exe** from [Releases](https://github.com/CursedPrograms/Simulacrum/releases) installs it for
+you (no administrator needed) with Start menu and Desktop shortcuts. Or unzip **Simulacrum-win64.zip** anywhere and run
+`Simulacrum.exe`, or get it through the [Atelier launcher](https://github.com/CursedPrograms/Atelier). Everything it
 needs is inside: AliceVision, the CUDA runtime and the Visual C++ runtime.
 
-Models go into `Documents\Terminus` (or `Terminus` in your user folder when Windows guards Documents), one folder each.
+Models go into `Documents\Simulacrum` (or `Simulacrum` in your user folder when Windows guards Documents), one folder each.
 
 **Good photos:** 30 to 200, walking all the way round, each sharing most of what's in the last one; again higher up and
 lower down; sharp, in good light, without zooming between photos. Shiny, see-through and plain white things are hard.
@@ -81,9 +81,9 @@ lower down; sharp, in good light, without zooming between photos. Shiny, see-thr
 
 Windows: Visual Studio 2022 (C++), CMake, Python and [Inno Setup 6](https://jrsoftware.org/isinfo.php), and the
 `aliceVision` folder of [Meshroom 2025.1 for Windows](https://zenodo.org/records/16887472) (set `MESHROOM_AV` to it).
-Then `build.bat` (or `build.ps1`): `tools/make_runtime.py` picks out the AliceVision programs Terminus runs and the
-libraries they load (about 440 MB of Meshroom's 15 GB), and the build packs `dist/Terminus-win64.zip` and
-`dist/Terminus-setup.exe`. `install.bat` / `install.ps1` install the build.
+Then `build.bat` (or `build.ps1`): `tools/make_runtime.py` picks out the AliceVision programs Simulacrum runs and the
+libraries they load (about 440 MB of Meshroom's 15 GB), and the build packs `dist/Simulacrum-win64.zip` and
+`dist/Simulacrum-setup.exe`. `install.bat` / `install.ps1` install the build.
 
 Linux: `./build.sh` (cmake, a C++17 compiler, libsdl2-dev), with AliceVision's `bin/` and `share/` in
 `runtime/alicevision/`.
@@ -95,7 +95,7 @@ The code, in `src/`:
 - `model.cpp`: OBJ, PLY and the cameras in; GLB, OBJ and STL out
 - `viewer.cpp`: the 3D view (OpenGL 3.3)
 - `gui.cpp`: the window (SDL2, Dear ImGui)
-- `splash.cpp`: the splash shown while Terminus starts, and in Help > About
+- `splash.cpp`: the splash shown while Simulacrum starts, and in Help > About
 
 ## Credits
 
@@ -106,9 +106,9 @@ The photogrammetry: [AliceVision](https://github.com/alicevision/AliceVision) (M
 
 <br>
 <div align="center">
-<a href="https://cursedprograms.github.io/Terminus/" target="_blank">
-    <img src="https://raw.githubusercontent.com/CursedPrograms/Terminus/main/images/site-qr.png"
-        alt="QR code to the Terminus website" style="width:200px;">
+<a href="https://cursedprograms.github.io/Simulacrum/" target="_blank">
+    <img src="https://raw.githubusercontent.com/CursedPrograms/Simulacrum/main/images/site-qr.png"
+        alt="QR code to the Simulacrum website" style="width:200px;">
 </a>
 </div>
 

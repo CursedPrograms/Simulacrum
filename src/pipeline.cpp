@@ -1,4 +1,4 @@
-// Terminus - the photogrammetry steps (see pipeline.h). The programs and their options are AliceVision's, as
+// Simulacrum - the photogrammetry steps (see pipeline.h). The programs and their options are AliceVision's, as
 // Meshroom 2025.1 runs them (AliceVision 3.3, MPL-2.0).
 #include "pipeline.h"
 #include "proc.h"

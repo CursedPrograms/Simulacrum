@@ -1,11 +1,11 @@
-// Terminus - photos to a textured 3D model, on your own PC. Part of Atelier.
+// Simulacrum - photos to a textured 3D model, on your own PC. Part of Atelier.
 // AliceVision's photogrammetry (as Meshroom runs it) in three plain steps: add photos, pick a quality, build; then
 // look at the model and save it as GLB, OBJ or STL. Every setting is a slider.
 //
-//   Terminus [project folder or photos...]
-//   Terminus --capture out.bmp [project]      a screenshot from a hidden window, then quit
-//   Terminus --make [--quality 0..3] photos   build straight away (with --capture: the picture once it's made)
-//   Terminus --resume project                 carry a stopped build on
+//   Simulacrum [project folder or photos...]
+//   Simulacrum --capture out.bmp [project]      a screenshot from a hidden window, then quit
+//   Simulacrum --make [--quality 0..3] photos   build straight away (with --capture: the picture once it's made)
+//   Simulacrum --resume project                 carry a stopped build on
 #include "model.h"
 #include "pipeline.h"
 #include "proc.h"
@@ -54,8 +54,8 @@
 
 namespace fs = std::filesystem;
 
-#ifndef TERMINUS_VERSION
-#define TERMINUS_VERSION "1.0.0"
+#ifndef SIMULACRUM_VERSION
+#define SIMULACRUM_VERSION "1.0.0"
 #endif
 
 // ---------- the Atelier look ----------
@@ -237,12 +237,12 @@ static void makeThumbs() {
     });
 }
 
-// ---- projects: a folder in Documents\Terminus with project.txt (the photos and the sliders)
+// ---- projects: a folder in Documents\Simulacrum with project.txt (the photos and the sliders)
 static void saveProject() {
     if (project.empty()) return;
     std::error_code ec; fs::create_directories(fs::u8path(project), ec);
     std::ofstream o(fs::u8path(project) / "project.txt");
-    o << "terminus 1\n";
+    o << "simulacrum 1\n";
     const Pipeline::Settings& s = settings;
     o << "quality " << s.quality << "\nfeatureDetail " << s.featureDetail << "\nakaze " << s.akaze << "\nmatchNeighbours " << s.matchNeighbours
       << "\ndepthScale " << s.depthScale << "\ndepthMaps " << s.depthMaps << "\nmeshDetail " << s.meshDetail << "\nsmoothing " << s.smoothing
@@ -275,7 +275,7 @@ static bool openProject(const std::string& dir) {
     }
     makeThumbs();
     loadResults();
-    SDL_SetWindowTitle(window, ("Terminus - " + fs::u8path(dir).filename().u8string()).c_str());
+    SDL_SetWindowTitle(window, ("Simulacrum - " + fs::u8path(dir).filename().u8string()).c_str());
     return true;
 }
 
@@ -293,7 +293,7 @@ static void newProject() {
     Viewer::setMesh(nullptr); Viewer::setPoints(nullptr); Viewer::setCameras(nullptr);
     { std::lock_guard<std::mutex> g(mtx); logLines.clear(); }
     buildError.clear();
-    SDL_SetWindowTitle(window, "Terminus");
+    SDL_SetWindowTitle(window, "Simulacrum");
 }
 
 static void addPhotos(const std::vector<std::string>& list) {
@@ -303,7 +303,7 @@ static void addPhotos(const std::vector<std::string>& list) {
     for (const auto& p : list) {
         std::error_code ec;
         const fs::path fp = fs::u8path(p);
-        if (fs::exists(fp / "project.txt", ec)) {   // a Terminus model: open it
+        if (fs::exists(fp / "project.txt", ec)) {   // a Simulacrum model: open it
             openProject(p); return;
         } else if (fs::is_directory(fp, ec)) {
             for (const auto& e : fs::directory_iterator(fp, ec))
@@ -531,7 +531,7 @@ static void photoGrid(ImVec2 size) {
         centred(mid.y - 50, C_TEXT, "Drop your photos here", bigFont);
         centred(mid.y - 14, C_DIM, "Photos of one thing, taken while walking all the way round it.");
         centred(mid.y + 12, C_DIM, "Or use Add photos... on the left.");
-        centred(mid.y + 50, C_PINK, "Terminus turns them into a 3D model you can turn, print or use anywhere.");
+        centred(mid.y + 50, C_PINK, "Simulacrum turns them into a 3D model you can turn, print or use anywhere.");
         return;
     }
     const float S = 180, pad = 8;
@@ -606,8 +606,8 @@ static void frame() {
         if (ImGui::BeginMenu("File")) {
             if (ImGui::MenuItem("New model", nullptr, false, !progress.running)) newProject();
             if (ImGui::MenuItem("Open a model...", nullptr, false, !progress.running)) {
-                const std::string f = pickFolder(L"Open a Terminus model (its folder in Documents\\Terminus)");
-                if (!f.empty() && !openProject(f)) say("That folder isn't a Terminus model");
+                const std::string f = pickFolder(L"Open a Simulacrum model (its folder in Documents\\Simulacrum)");
+                if (!f.empty() && !openProject(f)) say("That folder isn't a Simulacrum model");
             }
             if (ImGui::MenuItem("Show my models")) { std::error_code ec; fs::create_directories(fs::u8path(Proc::projectsDir()), ec); openInExplorer(Proc::projectsDir()); }
             ImGui::Separator();
@@ -616,7 +616,7 @@ static void frame() {
         }
         if (ImGui::BeginMenu("Help")) {
             if (ImGui::MenuItem("How to take good photos")) showHelp = true;
-            if (ImGui::MenuItem("About Terminus")) showAbout = true;
+            if (ImGui::MenuItem("About Simulacrum")) showAbout = true;
             ImGui::EndMenu();
         }
         top = ImGui::GetWindowSize().y;
@@ -709,7 +709,7 @@ int main(int argc, char** argv) {
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-    window = SDL_CreateWindow("Terminus", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1500, 900, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_HIDDEN);
+    window = SDL_CreateWindow("Simulacrum", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1500, 900, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_HIDDEN);
     if (!window) return 1;
     SDL_SetWindowMinimumSize(window, 1100, 650);
     SDL_GLContext gl = SDL_GL_CreateContext(window);
@@ -727,7 +727,7 @@ int main(int argc, char** argv) {
 
     SDL_Window* splashWin = nullptr;
     if (capture.empty()) {
-        splashWin = SDL_CreateWindow("Terminus", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, (int)Splash::W, (int)Splash::H, SDL_WINDOW_OPENGL | SDL_WINDOW_BORDERLESS);
+        splashWin = SDL_CreateWindow("Simulacrum", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, (int)Splash::W, (int)Splash::H, SDL_WINDOW_OPENGL | SDL_WINDOW_BORDERLESS);
         if (splashWin && SDL_GL_MakeCurrent(splashWin, gl) != 0) { SDL_DestroyWindow(splashWin); splashWin = nullptr; SDL_GL_MakeCurrent(window, gl); }
         if (splashWin && icon) SDL_SetWindowIcon(splashWin, icon);
     }
@@ -741,7 +741,7 @@ int main(int argc, char** argv) {
     static std::string status = "Starting...";
     std::thread([] {
         Proc::setupEnvironment();
-        if (Proc::runtimeDir().empty()) runtimeMissing = "Terminus's 3D engine (AliceVision) is missing. Please install Terminus again.";
+        if (Proc::runtimeDir().empty()) runtimeMissing = "Simulacrum's 3D engine (AliceVision) is missing. Please install Simulacrum again.";
         status = "Looking for the graphics card...";
         std::string n; const bool c = Proc::hasCuda(n);
         post([c, n] { cuda = c; gpuName = n; settings = Pipeline::Settings::preset(1, cuda); });

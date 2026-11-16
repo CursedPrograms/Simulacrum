@@ -1,4 +1,4 @@
-// Terminus - reading and writing models (see model.h)
+// Simulacrum - reading and writing models (see model.h)
 #include "model.h"
 #include "json.h"
 
@@ -231,7 +231,7 @@ static void outPos(const Mesh& m, size_t i, float scale, bool flipUp, float o[3]
 bool saveStl(const Mesh& m, const std::string& path, float scale, bool flipUp, std::string& err) {
     FILE* f = openU8(path, "wb");
     if (!f) { err = "Couldn't write " + path; return false; }
-    char head[80] = "Terminus - photos to 3D";
+    char head[80] = "Simulacrum - photos to 3D";
     fwrite(head, 1, 80, f);
     const uint32_t n = (uint32_t)m.triangles();
     fwrite(&n, 4, 1, f);
@@ -256,7 +256,7 @@ bool saveObj(const Mesh& m, const std::string& path, float scale, bool flipUp, s
     const std::string mtl = p.stem().u8string() + ".mtl";
     std::ofstream o(p);
     if (!o) { err = "Couldn't write " + path; return false; }
-    o << "# Terminus - photos to 3D\nmtllib " << mtl << "\n";
+    o << "# Simulacrum - photos to 3D\nmtllib " << mtl << "\n";
     for (size_t i = 0; i < m.pos.size() / 3; ++i) { float q[3]; outPos(m, i, scale, flipUp, q); o << "v " << q[0] << ' ' << q[1] << ' ' << q[2] << '\n'; }
     for (size_t i = 0; i < m.uv.size() / 2; ++i) o << "vt " << m.uv[i * 2] << ' ' << m.uv[i * 2 + 1] << '\n';
     int cur = -1;
@@ -338,7 +338,7 @@ bool saveGlb(const Mesh& m, const std::string& path, float scale, bool flipUp, s
         bv += std::string(i ? "," : "") + "{\"buffer\":0,\"byteOffset\":" + std::to_string(views[i].off) + ",\"byteLength\":" + std::to_string(views[i].len) +
               (views[i].target ? ",\"target\":" + std::to_string(views[i].target) : std::string()) + "}";
     pad4(bin, '\0');
-    json = "{\"asset\":{\"version\":\"2.0\",\"generator\":\"Terminus\"},\"scene\":0,\"scenes\":[{\"nodes\":[0]}],\"nodes\":[{\"mesh\":0,\"name\":\"model\"}],"
+    json = "{\"asset\":{\"version\":\"2.0\",\"generator\":\"Simulacrum\"},\"scene\":0,\"scenes\":[{\"nodes\":[0]}],\"nodes\":[{\"mesh\":0,\"name\":\"model\"}],"
            "\"meshes\":[" + meshes + "],\"materials\":[" + materials + "],\"accessors\":[" + accessors + "],\"bufferViews\":[" + bv + "],"
            "\"buffers\":[{\"byteLength\":" + std::to_string(bin.size()) + "}]" +
            (nTex ? ",\"images\":[" + images + "],\"textures\":[" + textures + "]" : std::string()) + "}";

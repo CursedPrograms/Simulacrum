@@ -1,4 +1,4 @@
-// Terminus - what a build makes: the textured mesh, the matched points and the cameras; read for the viewer and
+// Simulacrum - what a build makes: the textured mesh, the matched points and the cameras; read for the viewer and
 // written out as GLB (one file, for any 3D app), OBJ or STL (for 3D printing).
 #pragma once
 #include <cstdint>

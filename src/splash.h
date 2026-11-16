@@ -1,4 +1,4 @@
-// Terminus - the splash: shown in its own small window while Terminus starts, and in Help > About.
+// Simulacrum - the splash: shown in its own small window while Simulacrum starts, and in Help > About.
 #pragma once
 
 struct ImDrawList;
