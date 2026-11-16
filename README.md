@@ -55,6 +55,16 @@ the engine of [Meshroom](https://github.com/alicevision/Meshroom), in a window a
 - **Any PC:** an NVIDIA graphics card measures depth for full detail; without one, Terminus builds the model from the
   matched points by itself.
 
+## Minimum requirements
+
+| | |
+| --- | --- |
+| **System** | Windows 10 or 11, 64-bit |
+| **Processor** | a 64-bit processor with 4 cores or more |
+| **Memory** | 8 GB RAM (16 GB for High and Ultra) |
+| **Graphics** | any graphics card with OpenGL 3.3 (2010 or newer); an NVIDIA card (CUDA) for full-detail depth, without one it still builds the model |
+| **Disk** | 500 MB for the app, plus 1 to 5 GB for each model it builds |
+
 ## Download and run
 
 Windows: **Terminus-setup.exe** from [Releases](https://github.com/CursedPrograms/Terminus/releases) installs it for
