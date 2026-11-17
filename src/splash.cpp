@@ -59,10 +59,10 @@ void draw(ImDrawList* dl, float x, float y, const char* status, float progress) 
         dl->AddCircleFilled(c, 2.5f, PINK);
     }
 
-    // the name: "Termi" in the text colour, "nus" in pink
+    // the name: "Simu" in the text colour, "lacrum" in pink
     const float ts = 50, tx = x + 40, ty = y + 92;
-    text(dl, titleFont, ts, ImVec2(tx, ty), TEXT, "Termi");
-    text(dl, titleFont, ts, ImVec2(tx + textWidth(titleFont, ts, "Termi"), ty), PINK, "nus");
+    text(dl, titleFont, ts, ImVec2(tx, ty), TEXT, "Simu");
+    text(dl, titleFont, ts, ImVec2(tx + textWidth(titleFont, ts, "Simu"), ty), PINK, "lacrum");
     text(dl, nullptr, 16, ImVec2(tx + 2, ty + 62), DIM, "Version " SIMULACRUM_VERSION);
     text(dl, nullptr, 16, ImVec2(tx + 2, ty + 84), DIM, "Photos to 3D by Cursed Entertainment");
 
