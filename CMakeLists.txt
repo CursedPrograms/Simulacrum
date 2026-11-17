@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(Simulacrum VERSION 1.0.0 LANGUAGES C CXX)
+project(Simulacrum VERSION 1.1.0 LANGUAGES C CXX)
 # Simulacrum: photos to a textured 3D model, on your own PC. Part of Atelier.
 # The photogrammetry is AliceVision's (MPL-2.0), shipped beside Simulacrum.exe in alicevision\ (see make_runtime.py).
 set(CMAKE_CXX_STANDARD 17)

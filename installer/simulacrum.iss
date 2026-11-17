@@ -3,7 +3,7 @@
 ; uses too - with Start menu and Desktop shortcuts; everything it needs is inside, AliceVision included.
 
 #define AppName "Simulacrum"
-#define AppVersion "1.0.0"
+#define AppVersion "1.1.0"
 #define AppPublisher "Cursed Entertainment"
 #define AppURL "https://cursedprograms.github.io/Simulacrum/"
 

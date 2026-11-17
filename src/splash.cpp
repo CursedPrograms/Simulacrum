@@ -9,7 +9,7 @@
 #include <cmath>
 
 #ifndef SIMULACRUM_VERSION
-#define SIMULACRUM_VERSION "1.0.0"
+#define SIMULACRUM_VERSION "1.1.0"
 #endif
 
 namespace Splash {
